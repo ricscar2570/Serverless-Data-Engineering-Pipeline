@@ -97,6 +97,8 @@ sequenceDiagram
 
 ## 🚀 **Come Funziona?**
 
+The Serverless Data Engineering Pipeline is a scalable, serverless application designed to process, transform, and visualize IoT data in real time using AWS services. It leverages AWS Lambda for data ingestion, AWS Glue for data transformation, and Amazon Kinesis for real-time stream processing. The processed data is stored in Amazon S3 and visualized via an interactive React-based dashboard. The pipeline includes advanced monitoring using Prometheus and Grafana, along with multi-cloud backup capabilities for Google Cloud and Azure. This application is ideal for efficient IoT data management and supports automation, scalability, and multi-cloud flexibility.
+
 
 ```
     Raccolta dati: I dispositivi inviano dati a un endpoint gestito da Lambda.
