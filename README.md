@@ -5,6 +5,8 @@
 [![Contributors](https://img.shields.io/github/contributors/your-repo?color=green&style=flat-square)](https://github.com/your-repo)
 
 > 🛠️ Una pipeline di data engineering serverless scalabile, sicura e progettata per applicazioni IoT e Machine Learning.
+> ![81679d53-b66b-4156-8134-c30380e61b1c-2x](https://github.com/user-attachments/assets/dff3d3a4-419b-4263-aec9-bcdb53aa1c57)
+
 
 ---
 
