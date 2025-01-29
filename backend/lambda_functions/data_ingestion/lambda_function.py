@@ -1,40 +1,26 @@
-import boto3
 import json
-import logging
+import boto3
 
-sns_client = boto3.client("sns")
-s3 = boto3.client("s3")
-sns_topic_arn = "arn:aws:sns:<region>:<account-id>:serverless-notifications"
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+sagemaker_runtime = boto3.client("sagemaker-runtime")
+endpoint_name = "my-endpoint"  # Sostituisci con il nome del tuo endpoint
 
 def lambda_handler(event, context):
-    try:
-        logger.info("Evento ricevuto: %s", event)
+    # Estrai i dati di input
+    data = json.loads(event["body"])
+    payload = ",".join(map(str, data.values()))
 
-        # Parsing del payload JSON
-        data = json.loads(event["body"])
-        logger.info("Dati elaborati: %s", data)
+    # Invoca l'endpoint SageMaker
+    response = sagemaker_runtime.invoke_endpoint(
+        EndpointName=endpoint_name,
+        ContentType="text/csv",
+        Body=payload,
+    )
 
-        # Salva i dati su S3
-        bucket_name = "data-lake-serverless"
-        file_name = f"processed-data-{data['device_id']}.json"
-        s3.put_object(Bucket=bucket_name, Key=file_name, Body=json.dumps(data))
+    # Estrai la previsione
+    prediction = response["Body"].read().decode("utf-8")
 
-        # Notifica SNS di successo
-        sns_client.publish(
-            TopicArn=sns_topic_arn,
-            Subject="Successo Ingestione Dati",
-            Message=f"Dati elaborati per dispositivo {data['device_id']}"
-        )
-        return {"statusCode": 200, "body": "Successo"}
-
-    except Exception as e:
-        logger.error("Errore durante l'elaborazione: %s", str(e))
-        sns_client.publish(
-            TopicArn=sns_topic_arn,
-            Subject="Errore Ingestione Dati",
-            Message=f"Errore: {str(e)}"
-        )
-        return {"statusCode": 500, "body": "Errore"}
+    # Restituisci la previsione
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"prediction": prediction}),
+    }
