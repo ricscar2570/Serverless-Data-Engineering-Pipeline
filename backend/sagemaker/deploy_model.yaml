@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  EndpointConfig:
+    Type: 'AWS::SageMaker::EndpointConfig'
+    Properties:
+      ProductionVariants:
+        - VariantName: 'AllTraffic'
+          ModelName: 'my-model'  # Sostituisci con il nome del tuo modello
+          InitialInstanceCount: 1
+          InstanceType: 'ml.t2.medium'  # Tipo di istanza EC2 per l'endpoint
+  Endpoint:
+    Type: 'AWS::SageMaker::Endpoint'
+    Properties:
+      EndpointConfigName:!Ref EndpointConfig
