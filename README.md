@@ -11,40 +11,40 @@
 
 ```mermaid
 sequenceDiagram
-    participant User as Dispositivo/Utente
-    participant LambdaIngest as Lambda Ingestione Dati
-    participant S3 as S3 Archiviazione Dati
+    participant User as Device/User
+    participant LambdaIngest as Lambda Data Ingestion
+    participant S3 as S3 Data Storage
     participant Glue as Glue ETL
     participant SageMaker as SageMaker
-    participant Dashboard as Dashboard React
+    participant Dashboard as React Dashboard
 
-    User->>LambdaIngest: Invio Dati (POST)
+    User->>LambdaIngest: Send Data (POST)
     activate LambdaIngest
-    LambdaIngest->>S3: Salva dati grezzi
+    LambdaIngest->>S3: Store raw data
     deactivate LambdaIngest
     
     S3->>Glue: Trigger ETL Job
     activate Glue
-    Glue-->>S3: Salva dati trasformati
+    Glue-->>S3: Store transformed data
     deactivate Glue
     
-    S3->>SageMaker: Fornisce dati per l'addestramento
+    S3->>SageMaker: Provide data for training
     activate SageMaker
-    SageMaker-->>S3: Salva modello addestrato
+    SageMaker-->>S3: Save trained model
     deactivate SageMaker
 
-    User->>SageMaker: Richiesta di predizioni
+    User->>SageMaker: Request predictions
     activate SageMaker
-    SageMaker->>User: Restituisce predizione
+    SageMaker->>User: Return prediction
     deactivate SageMaker
 
-    User->>Dashboard: Visualizza dati e predizioni
+    User->>Dashboard: Display data and predictions
     activate Dashboard
     deactivate Dashboard
 ```
 
 
-```
+```Folder structure
 ├── src/
 │   ├── lambda/
 │   │   ├── data_ingestion.py
@@ -147,13 +147,6 @@ The **Serverless Data Engineering Pipeline** processes, transforms, and analyzes
 
 ---
 
-## 📂 Folder Structure  
-
-├── src/ │ ├── lambda/ │ │ ├── data_ingestion.py │ │ ├── prediction_service.py │ ├── glue/ │ │ ├── transform_data.py │ │ ├── prepare_ml_dataset.py │ ├── sagemaker/ │ │ ├── train_model.py │ │ ├── deploy_model.yaml │ ├── frontend/ │ │ ├── src/ │ │ │ ├── components/ │ │ │ │ ├── Dashboard.js │ │ │ │ ├── Upload.js │ │ │ ├── App.js │ │ │ ├── index.js ├── monitoring/ │ ├── prometheus.yml │ ├── grafana_dashboard.json ├── backup/ │ ├── backup_to_google.py │ ├── backup_to_azure.py ├── README.md ├── LICENSE
-
-
----
-
 ## 📈 Charts & Visualizations  
 
 📊 **Predictions Over Time** – Real-time chart displaying predictions.  
@@ -170,6 +163,7 @@ The **Serverless Data Engineering Pipeline** processes, transforms, and analyzes
 
 ### **Deployment Steps**
 1️⃣ Clone the repository:
+
 ```sh
 git clone https://github.com/your-repo/serverless-pipeline.git
 cd serverless-pipeline
