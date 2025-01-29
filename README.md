@@ -55,29 +55,6 @@ sequenceDiagram
     deactivate Dashboard
 ```
 
-# Folder structure
-```Folder structure
-├── src/
-│   ├── lambda/
-│   │   ├── data_ingestion.py
-│   │   ├── prediction_service.py
-│   ├── glue/
-│   │   ├── transform_data.py
-│   │   ├── prepare_ml_dataset.py
-│   ├── sagemaker/
-│   │   ├── train_model.py
-│   │   ├── deploy_model.yaml
-│   ├── frontend/
-│   │   ├── src/
-│   │   │   ├── components/
-│   │   │   │   ├── Dashboard.js
-│   │   │   │   ├── Upload.js
-│   │   │   ├── App.js
-│   │   │   ├── index.js
-├── README.md
-├── LICENSE
-
-```
 
 # First Mock-up 
 > ![81679d53-b66b-4156-8134-c30380e61b1c-2x](https://github.com/user-attachments/assets/dff3d3a4-419b-4263-aec9-bcdb53aa1c57)
