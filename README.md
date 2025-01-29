@@ -1,5 +1,20 @@
 # 🚀 Serverless Data Engineering Pipeline
 
+A **scalable, serverless data engineering pipeline** designed for **real-time data ingestion, transformation, and machine learning**. Built on **AWS**, this architecture enables automated ETL, real-time processing, and seamless data visualization.
+
+---
+
+## 🌟 Key Features
+
+✔️ **Real-time data ingestion** via REST API or streaming sources.  
+✔️ **Automated data transformation** into structured datasets.  
+✔️ **Machine Learning integration** with SageMaker for real-time predictions.  
+✔️ **Interactive dashboard** for monitoring and data visualization.  
+✔️ **Serverless architecture** for scalability and cost efficiency.  
+✔️ **Multi-cloud support** for backup and redundancy.  
+
+---
+
 [![AWS]([https://img.shields.io/badge/AWS-Serverless-orange?logo=amazonaws&style=flat-square)](https://aws.amazon.com/](https://github.com/ricscar2570/portfolio/blob/main/Serverless%20Data%20Engineering%20Pipeline/Serverless.png?raw=true)) 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/your-repo?color=green&style=flat-square)](https://github.com/your-repo)
@@ -66,22 +81,6 @@ sequenceDiagram
 # First Mock-up 
 > ![81679d53-b66b-4156-8134-c30380e61b1c-2x](https://github.com/user-attachments/assets/dff3d3a4-419b-4263-aec9-bcdb53aa1c57)
 
-# 🚀 Serverless Data Engineering Pipeline
-
-A **scalable, serverless data engineering pipeline** designed for **real-time data ingestion, transformation, and machine learning**. Built on **AWS**, this architecture enables automated ETL, real-time processing, and seamless data visualization.
-
----
-
-## 🌟 Key Features
-
-✔️ **Real-time data ingestion** via REST API or streaming sources.  
-✔️ **Automated data transformation** into structured datasets.  
-✔️ **Machine Learning integration** with SageMaker for real-time predictions.  
-✔️ **Interactive dashboard** for monitoring and data visualization.  
-✔️ **Serverless architecture** for scalability and cost efficiency.  
-✔️ **Multi-cloud support** for backup and redundancy.  
-
----
 
 ## 🏗️ Project Architecture  
 
