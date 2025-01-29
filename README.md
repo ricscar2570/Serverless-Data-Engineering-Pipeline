@@ -44,7 +44,7 @@ sequenceDiagram
 ```
 
 
-
+```
 ├── src/
 │   ├── lambda/
 │   │   ├── data_ingestion.py
