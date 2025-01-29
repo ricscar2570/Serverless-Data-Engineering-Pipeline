@@ -1,37 +1,28 @@
-import boto3
 import sagemaker
-from sagemaker.inputs import TrainingInput
-from sagemaker.estimator import Estimator
+from sagemaker.sklearn.estimator import SKLearn
+import boto3
+import os
 
-# Configura SageMaker
+# Configurazione
 sagemaker_session = sagemaker.Session()
-bucket = "data-lake-serverless"  # nome del  bucket S3
-prefix = "processed-data"  #  prefisso del percorso dei dati in S3
-role = "arn:aws:iam::<account-id>:role/sagemaker-role"  #  ruolo IAM per SageMaker
+role = os.environ.get("SAGEMAKER_ROLE", "arn:aws:iam::your-account-id:role/service-role/AmazonSageMaker-ExecutionRole")
+bucket = sagemaker_session.default_bucket()
+prefix = "sagemaker-pipeline"
 
-# Definisci l'algoritmo di training
-container = "ecr.aws/sagemaker-python-sklearn:latest"  # Esempio con scikit-learn
-instance_type = "ml.m5.large"  # Tipo di istanza EC2 per il training
+# Upload del dataset su S3
+data_path = "s3://{}/{}/".format(bucket, prefix)
+train_path = sagemaker_session.upload_data("data/test_data.csv", bucket=bucket, key_prefix=prefix)
 
-# Definisci i dati di training
-train_input = TrainingInput(
-    f"s3://{bucket}/{prefix}/train", content_type="text/csv"
-)
-
-# Crea un estimator SageMaker
-estimator = Estimator(
-    container,
-    role,
+# Creazione dell'estimator con Scikit-Learn
+sklearn_estimator = SKLearn(
+    entry_point="train_script.py",
+    role=role,
     instance_count=1,
-    instance_type=instance_type,
-    output_path=f"s3://{bucket}/{prefix}/output",
+    instance_type="ml.m5.large",
+    framework_version="0.23-1",
     sagemaker_session=sagemaker_session,
 )
 
-# Avvia il training
-estimator.fit({"train": train_input})
-
-# Salva il modello
-model_name = "my-model"
-model = estimator.create_model()
-model.save(model_name)
+# Addestramento del modello
+sklearn_estimator.fit({"train": train_path})
+print("Modello addestrato con successo!")
