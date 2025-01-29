@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from "react";
-import RealTimeChart from "./RealTimeChart";
-import DataGeneratorForm from "./DataGeneratorForm";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Dashboard = () => {
-  const [data, setData] = useState([]);
+  const [pipelineStatus, setPipelineStatus] = useState("...");
 
   useEffect(() => {
-    fetch("/api/data")
-      .then((response) => response.json())
-      .then((data) => setData(data));
+    const fetchStatus = async () => {
+      const response = await axios.get("https://your-api-gateway-url/status");
+      setPipelineStatus(response.data.status);
+    };
+    fetchStatus();
   }, []);
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <DataGeneratorForm />
-      <RealTimeChart data={data} />
+      <h1>Serverless Data Pipeline</h1>
+      <p>Stato della pipeline: {pipelineStatus}</p>
     </div>
   );
 };
 
 export default Dashboard;
-
