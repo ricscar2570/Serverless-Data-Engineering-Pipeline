@@ -4,24 +4,10 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/your-repo?color=green&style=flat-square)](https://github.com/your-repo)
 
-> 🛠️ Una pipeline di data engineering serverless scalabile, sicura e progettata per applicazioni IoT e Machine Learning.
+
 > ![81679d53-b66b-4156-8134-c30380e61b1c-2x](https://github.com/user-attachments/assets/dff3d3a4-419b-4263-aec9-bcdb53aa1c57)
 
 
----
-
-## 🌟 **Caratteristiche Principali**
-✔️ **Ingestione in tempo reale** dei dati tramite endpoint REST.  
-✔️ **Trasformazione automatica** dei dati grezzi in dataset strutturati.  
-✔️ **Machine Learning** con SageMaker per predizioni in tempo reale.  
-✔️ **Dashboard interattiva** per il monitoraggio e la visualizzazione dei dati.  
-✔️ **Serverless** e altamente scalabile grazie all'architettura AWS.  
-
----
-
-## 🏗️ **Architettura del Progetto**
-
-### **Diagramma dell'Architettura**
 
 ```mermaid
 sequenceDiagram
@@ -57,60 +43,7 @@ sequenceDiagram
     deactivate Dashboard
 ```
 
-1. **AWS Lambda**: Funzioni per ingestione dati e inferenze in tempo reale.
-2. **Amazon S3**: Archiviazione per dati grezzi, trasformati e dataset ML-ready.
-3. **AWS Glue**: Trasformazione e preparazione dei dati per machine learning.
-4. **Amazon SageMaker**: Addestramento e distribuzione del modello ML.
-5. **React Dashboard**: Interfaccia utente per visualizzare e monitorare i dati.
 
----
-
-## 🧩 **Componenti del Progetto**
-
-### **1. Lambda Functions**  
-- 📥 **Data Ingestion**: Raccoglie i dati e li archivia in S3.  
-- 🤖 **Prediction Service**: Restituisce predizioni in tempo reale da SageMaker.
-
-### **2. Glue ETL Scripts**  
-- 🔄 **Transform Data**: Pulisce e struttura i dati grezzi.  
-- 🧹 **Prepare ML Dataset**: Genera dataset CSV per l'addestramento ML.
-
-### **3. SageMaker**  
-- 🏋️ **Training**: Addestra un modello di regressione lineare.  
-- ⚡ **Endpoint Deployment**: Distribuisce il modello per inferenze in tempo reale.  
-
-### **4. Front-End**  
-- 📊 **Dashboard**: Visualizza predizioni e distribuzioni dei dati con grafici interattivi.  
-- 📁 **Upload Multi-file**: Permette il caricamento simultaneo di più file.
-
----
-
-## 🌈 **Tecnologie Utilizzate**
-![AWS](https://img.shields.io/badge/AWS-100%25-orange?logo=amazonaws&style=flat-square)
-![React](https://img.shields.io/badge/React.js-UI-blue?logo=react&style=flat-square)
-![Python](https://img.shields.io/badge/Python-ETL-yellow?logo=python&style=flat-square)
-![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-brightgreen?logo=javascript&style=flat-square)
-
-- **AWS Services**: Lambda, S3, Glue, SageMaker, Step Functions.  
-- **Framework**: React.js per la dashboard interattiva.  
-- **Linguaggi**: Python (ETL, Lambda), JavaScript (Frontend).  
-
----
-
-## 🚀 **Come Funziona?**
-
-The Serverless Data Engineering Pipeline is a scalable, serverless application designed to process, transform, and visualize IoT data in real time using AWS services. It leverages AWS Lambda for data ingestion, AWS Glue for data transformation, and Amazon Kinesis for real-time stream processing. The processed data is stored in Amazon S3 and visualized via an interactive React-based dashboard. The pipeline includes monitoring using Prometheus and Grafana, along with multi-cloud backup capabilities for Google Cloud and Azure. This application is meant for IoT data management and supports automation, scalability, and multi-cloud flexibility.
-
-
-```
-    Raccolta dati: I dispositivi inviano dati a un endpoint gestito da Lambda.
-    Archiviazione: I dati vengono salvati in S3.
-    ETL: Glue trasforma e prepara i dati per il machine learning.
-    Addestramento: SageMaker addestra un modello con i dati preparati.
-    Predizioni: Lambda invoca l’endpoint SageMaker per predizioni in tempo reale.
-    Visualizzazione: La dashboard React mostra i dati e le predizioni.
-
-📂 Struttura della Cartella
 
 ├── src/
 │   ├── lambda/
@@ -133,74 +66,167 @@ The Serverless Data Engineering Pipeline is a scalable, serverless application d
 ├── LICENSE
 
 ```
+# 🚀 Serverless Data Engineering Pipeline
 
-📈 Grafici e Visualizzazioni
-Predizioni nel Tempo
+A **scalable, serverless data engineering pipeline** designed for **real-time data ingestion, transformation, and machine learning**. Built on **AWS**, this architecture enables automated ETL, real-time processing, and seamless data visualization.
 
-Distribuzione dei Dati
+---
 
-🔧 Setup
-1. Requisiti
+## 🌟 Key Features
 
-    AWS CLI: Configurato con credenziali valide.
-    Node.js: Per il frontend React.
-    Python 3.x: Per script ETL e Lambda.
+✔️ **Real-time data ingestion** via REST API or streaming sources.  
+✔️ **Automated data transformation** into structured datasets.  
+✔️ **Machine Learning integration** with SageMaker for real-time predictions.  
+✔️ **Interactive dashboard** for monitoring and data visualization.  
+✔️ **Serverless architecture** for scalability and cost efficiency.  
+✔️ **Multi-cloud support** for backup and redundancy.  
 
-2. Deployment
+---
 
-    Clonare il repository:
+## 🏗️ Project Architecture  
 
+### **System Diagram**
+A high-level overview of how various AWS services interact within the pipeline.
+
+- **AWS Lambda**: Handles data ingestion and real-time predictions.
+- **Amazon S3**: Stores raw data, transformed datasets, and machine learning-ready data.
+- **AWS Glue**: Cleans and processes raw data for machine learning.
+- **Amazon SageMaker**: Trains and deploys models for real-time inference.
+- **Amazon Kinesis**: Enables real-time streaming data processing.
+- **React Dashboard**: Provides a user-friendly interface for monitoring and visualization.
+- **Prometheus & Grafana**: Monitor pipeline performance and detect anomalies.
+
+---
+
+## 🧩 Project Components  
+
+### **1. Lambda Functions**
+📥 **Data Ingestion**: Collects data from various sources and stores it in S3.  
+🤖 **Prediction Service**: Calls SageMaker to return real-time predictions.  
+
+### **2. Glue ETL Scripts**
+🔄 **Transform Data**: Cleans and structures raw data.  
+🧹 **Prepare ML Dataset**: Generates structured CSV datasets for machine learning.  
+
+### **3. SageMaker**
+🏋️ **Training**: Trains an ML model (e.g., XGBoost, Linear Regression).  
+⚡ **Endpoint Deployment**: Deploys the trained model for real-time inference.  
+
+### **4. Real-Time Processing**
+📊 **Amazon Kinesis**: Enables low-latency stream processing for real-time applications.  
+
+### **5. Front-End**
+📊 **Dashboard**: Visualizes predictions and processed data with interactive charts.  
+📁 **Upload Multi-file**: Supports simultaneous file uploads for batch processing.  
+
+---
+
+## 🌈 Technologies Used  
+
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?&style=flat&logo=amazonaws&logoColor=white)  
+![React](https://img.shields.io/badge/React-%2361DAFB.svg?&style=flat&logo=react&logoColor=white)  
+![Python](https://img.shields.io/badge/Python-%233776AB.svg?&style=flat&logo=python&logoColor=white)  
+![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?&style=flat&logo=javascript&logoColor=black)  
+
+- **AWS Services**: Lambda, S3, Glue, SageMaker, Kinesis, Step Functions, CloudWatch, SNS.  
+- **Frameworks**: React.js (dashboard), PySpark (ETL).  
+- **Languages**: Python (ETL, Lambda), JavaScript (Frontend).  
+
+---
+
+## 🚀 How It Works  
+
+The **Serverless Data Engineering Pipeline** processes, transforms, and analyzes data from **various data sources** in real time. It automates the entire data flow from ingestion to machine learning predictions.
+
+1. **Data Collection**: Devices and applications send data to an AWS Lambda-managed API endpoint.  
+2. **Storage**: The data is stored in Amazon S3 as raw JSON or CSV.  
+3. **ETL Processing**: AWS Glue cleans, structures, and prepares the data for ML.  
+4. **Machine Learning Training**: SageMaker trains models on transformed datasets.  
+5. **Real-Time Predictions**: Lambda invokes SageMaker to get real-time predictions.  
+6. **Data Visualization**: The React-based dashboard displays live data and ML insights.  
+
+---
+
+## 📂 Folder Structure  
+
+├── src/ │ ├── lambda/ │ │ ├── data_ingestion.py │ │ ├── prediction_service.py │ ├── glue/ │ │ ├── transform_data.py │ │ ├── prepare_ml_dataset.py │ ├── sagemaker/ │ │ ├── train_model.py │ │ ├── deploy_model.yaml │ ├── frontend/ │ │ ├── src/ │ │ │ ├── components/ │ │ │ │ ├── Dashboard.js │ │ │ │ ├── Upload.js │ │ │ ├── App.js │ │ │ ├── index.js ├── monitoring/ │ ├── prometheus.yml │ ├── grafana_dashboard.json ├── backup/ │ ├── backup_to_google.py │ ├── backup_to_azure.py ├── README.md ├── LICENSE
+
+
+---
+
+## 📈 Charts & Visualizations  
+
+📊 **Predictions Over Time** – Real-time chart displaying predictions.  
+📊 **Data Distribution** – Insights into the dataset’s structure and anomalies.  
+
+---
+
+## 🔧 Setup  
+
+### **Prerequisites**
+- **AWS CLI**: Configured with valid credentials.  
+- **Node.js**: Required for the React frontend.  
+- **Python 3.x**: Required for Lambda functions and Glue ETL scripts.  
+
+### **Deployment Steps**
+1️⃣ Clone the repository:
+```sh
 git clone https://github.com/your-repo/serverless-pipeline.git
 cd serverless-pipeline
 
-Configurare AWS CLI:
+2️⃣ Configure AWS CLI:
 
 aws configure
 
-Installare le dipendenze:
+3️⃣ Install dependencies:
 
-    Lambda e Glue:
+For Lambda and Glue:
 
 pip install -r requirements.txt
 
-Frontend:
+For Frontend:
 
-    cd frontend
-    npm install
+cd frontend
+npm install
 
-Deploy CloudFormation:
+4️⃣ Deploy with AWS CloudFormation:
 
 aws cloudformation deploy --template-file template.yaml --stack-name serverless-pipeline
 
-Avviare il Frontend:
+5️⃣ Start the frontend:
 
-    npm start
+npm start
 
-📌 Esempi di Utilizzo
-Richiesta di Ingestione Dati
+📌 Usage Examples
+Data Ingestion Request
 
 curl -X POST -H "Content-Type: application/json" -d '{"device_id": "123", "value": 42}' https://your-api-endpoint/data-ingestion
 
-Richiesta di Predizione
+Real-Time Prediction Request
 
 curl -X POST -H "Content-Type: application/json" -d '{"feature_value": 50}' https://your-api-endpoint/predict
 
-🤝 Contribuire
+🤝 Contributing
 
-Contribuire è semplice! Segui questi passi:
+Want to contribute? Follow these steps: 1️⃣ Fork the repository.
+2️⃣ Create a new branch:
 
-    Fork il repository.
-    Crea un nuovo branch: git checkout -b feature-nuova-funzionalità.
-    Fai il commit delle modifiche: git commit -m "Aggiunta nuova funzionalità".
-    Fai un push al branch: git push origin feature-nuova-funzionalità.
-    Apri una Pull Request.
+git checkout -b feature-new-feature
 
-📝 Licenza
+3️⃣ Commit your changes:
 
-Questo progetto è distribuito sotto licenza MIT. Vedi il file LICENSE per maggiori dettagli.
-📧 Contatti
+git commit -m "Added a new feature"
 
-Hai domande o suggerimenti? Contattaci!
+4️⃣ Push to the branch:
+
+git push origin feature-new-feature
+
+5️⃣ Open a Pull Request.
+📝 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+📧 Contact
+
+💬 Questions? Suggestions? Contact us!
 📧 Email: ricscar@gmail.com
 🌐 Website: riccardoscaringi.eu
-
