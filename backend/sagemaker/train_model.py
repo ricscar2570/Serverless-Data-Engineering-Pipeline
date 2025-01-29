@@ -11,9 +11,11 @@ prefix = "sagemaker-pipeline"
 # Upload dataset su S3
 train_path = sagemaker_session.upload_data("data/test_data.csv", bucket=bucket, key_prefix=prefix)
 
-# Configurazione Spot Instances
-spot_config = {"MaxWaitTimeInSeconds": 3600, "MaxRuntimeInSeconds": 1800}
+# Logging avanzato su CloudWatch
+log_group_name = "/aws/sagemaker/training"
+log_stream_name = "SageMakerTrainingLogs"
 
+# Configurazione Logging per SageMaker
 sklearn_estimator = SKLearn(
     entry_point="train_script.py",
     role=role,
@@ -21,11 +23,15 @@ sklearn_estimator = SKLearn(
     instance_type="ml.m5.large",
     framework_version="0.23-1",
     sagemaker_session=sagemaker_session,
-    use_spot_instances=True,  # ✅ Spot Instances Attivate
-    max_wait=spot_config["MaxWaitTimeInSeconds"],  # Tempo massimo di attesa per l'istanza Spot
-    max_run=spot_config["MaxRuntimeInSeconds"],  # Tempo massimo di esecuzione del training
+    use_spot_instances=True,
+    max_wait=3600,
+    max_run=1800,
+    enable_sagemaker_metrics=True,  # ✅ Attiva metriche avanzate
+    hyperparameters={"sagemaker_program": "train_script.py"},
+    output_path="s3://{}/{}".format(bucket, prefix),
+    debug_hook_config={"S3OutputPath": "s3://{}/debugger/".format(bucket)},
 )
 
 # Avvio del training
 sklearn_estimator.fit({"train": train_path})
-print("Modello addestrato con Spot Instances con successo!")
+print(f"Training SageMaker completato! Log disponibili su {log_group_name}")
