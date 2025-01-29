@@ -5,9 +5,9 @@ from sagemaker.estimator import Estimator
 
 # Configura SageMaker
 sagemaker_session = sagemaker.Session()
-bucket = "data-lake-serverless"  # Sostituisci con il nome del tuo bucket S3
-prefix = "processed-data"  # Sostituisci con il prefisso del percorso dei dati in S3
-role = "arn:aws:iam::<account-id>:role/sagemaker-role"  # Sostituisci con il ruolo IAM per SageMaker
+bucket = "data-lake-serverless"  # nome del  bucket S3
+prefix = "processed-data"  #  prefisso del percorso dei dati in S3
+role = "arn:aws:iam::<account-id>:role/sagemaker-role"  #  ruolo IAM per SageMaker
 
 # Definisci l'algoritmo di training
 container = "ecr.aws/sagemaker-python-sklearn:latest"  # Esempio con scikit-learn
