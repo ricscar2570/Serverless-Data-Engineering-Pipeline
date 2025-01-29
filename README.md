@@ -5,10 +5,6 @@
 [![Contributors](https://img.shields.io/github/contributors/your-repo?color=green&style=flat-square)](https://github.com/your-repo)
 
 
-> ![81679d53-b66b-4156-8134-c30380e61b1c-2x](https://github.com/user-attachments/assets/dff3d3a4-419b-4263-aec9-bcdb53aa1c57)
-
-
-
 ```mermaid
 sequenceDiagram
     participant User as Device/User
@@ -66,6 +62,10 @@ sequenceDiagram
 ├── LICENSE
 
 ```
+
+# First Mock-up 
+> ![81679d53-b66b-4156-8134-c30380e61b1c-2x](https://github.com/user-attachments/assets/dff3d3a4-419b-4263-aec9-bcdb53aa1c57)
+
 # 🚀 Serverless Data Engineering Pipeline
 
 A **scalable, serverless data engineering pipeline** designed for **real-time data ingestion, transformation, and machine learning**. Built on **AWS**, this architecture enables automated ETL, real-time processing, and seamless data visualization.
