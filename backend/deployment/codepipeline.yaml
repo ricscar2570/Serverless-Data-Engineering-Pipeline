@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+  pre_build:
+    commands:
+      - echo "Installazione dipendenze..."
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - echo "Avvio del training SageMaker..."
+      - python backend/sagemaker/train_model.py
+  post_build:
+    commands:
+      - echo "Deploy del modello SageMaker..."
+      - python backend/sagemaker/deploy_model.py
+artifacts:
+  files:
+    - "**/*"
