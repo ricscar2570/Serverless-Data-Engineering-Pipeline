@@ -20,6 +20,7 @@ A **scalable, serverless data engineering pipeline** designed for **real-time da
 [![Contributors](https://img.shields.io/github/contributors/your-repo?color=green&style=flat-square)](https://github.com/your-repo)
 
 
+# Sequence Diagram
 ```mermaid
 sequenceDiagram
     participant User as Device/User
@@ -54,7 +55,7 @@ sequenceDiagram
     deactivate Dashboard
 ```
 
-
+# Folder structure
 ```Folder structure
 ├── src/
 │   ├── lambda/
