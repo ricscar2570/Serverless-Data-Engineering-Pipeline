@@ -1,0 +1,22 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/Lambda", "Invocations", "FunctionName", "serverless-lambda"]
+        ],
+        "title": "Esecuzioni Lambda"
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/Lambda", "Errors", "FunctionName", "serverless-lambda"]
+        ],
+        "title": "Errori Lambda"
+      }
+    }
+  ]
+}

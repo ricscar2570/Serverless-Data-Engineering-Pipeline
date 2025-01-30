@@ -1,29 +1,23 @@
-from google.cloud import storage
-import boto3
 import os
+import boto3
+from google.cloud import storage
 
-def backup_to_google(s3_bucket, gcs_bucket):
-    # Configura client AWS S3
-    s3 = boto3.client("s3")
-    # Configura client Google Cloud Storage
+s3 = boto3.client("s3")
+bucket_name = os.getenv("AWS_S3_BUCKET", "data-lake-serverless")
+gcs_bucket = os.getenv("GCS_BUCKET", "gcs-data-lake")
+
+def backup_to_google():
     gcs = storage.Client()
-
-    # Lista file in S3
-    objects = s3.list_objects_v2(Bucket=s3_bucket)
+    objects = s3.list_objects_v2(Bucket=bucket_name)
+    
     for obj in objects.get("Contents", []):
         file_key = obj["Key"]
-        print(f"Scaricando {file_key} da S3...")
-        s3.download_file(s3_bucket, file_key, file_key)
-
-        # Carica su GCS
-        print(f"Caricando {file_key} su Google Cloud Storage...")
+        s3.download_file(bucket_name, file_key, file_key)
+        
         bucket = gcs.bucket(gcs_bucket)
         blob = bucket.blob(file_key)
         blob.upload_from_filename(file_key)
-
-        # Rimuovi il file locale
         os.remove(file_key)
 
 if __name__ == "__main__":
-    backup_to_google("data-lake-serverless", "gcs-data-lake")
-
+    backup_to_google()

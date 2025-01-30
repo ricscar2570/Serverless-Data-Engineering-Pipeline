@@ -1,26 +1,33 @@
-import json
+from pydantic import BaseModel, ValidationError
 import boto3
+import json
+import logging
+import os
 
-sagemaker_runtime = boto3.client("sagemaker-runtime")
-endpoint_name = "my-endpoint"  # Sostituisci con il nome del tuo endpoint
+sns_client = boto3.client("sns")
+s3 = boto3.client("s3")
+logs_client = boto3.client("logs")
+
+LOG_GROUP = os.getenv("LOG_GROUP_NAME", "ServerlessPipelineLogs")
+LOG_STREAM = os.getenv("LOG_STREAM_NAME", "LambdaExecution")
+
+class DataPayload(BaseModel):
+    device_id: str
+    value: float
+    timestamp: str
 
 def lambda_handler(event, context):
-    # Estrai i dati di input
-    data = json.loads(event["body"])
-    payload = ",".join(map(str, data.values()))
+    try:
+        data = json.loads(event["body"])
+        validated_data = DataPayload(**data)
 
-    # Invoca l'endpoint SageMaker
-    response = sagemaker_runtime.invoke_endpoint(
-        EndpointName=endpoint_name,
-        ContentType="text/csv",
-        Body=payload,
-    )
+        s3.put_object(
+            Bucket="data-lake-serverless",
+            Key=f"processed-data-{validated_data.device_id}.json",
+            Body=json.dumps(data)
+        )
 
-    # Estrai la previsione
-    prediction = response["Body"].read().decode("utf-8")
-
-    # Restituisci la previsione
-    return {
-        "statusCode": 200,
-        "body": json.dumps({"prediction": prediction}),
-    }
+        return {"statusCode": 200, "body": "Successo"}
+    
+    except ValidationError as e:
+        return {"statusCode": 400, "body": "Errore di validazione"}
